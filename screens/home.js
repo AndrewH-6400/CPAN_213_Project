@@ -1,18 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
+import { SpeedDial } from "@rneui/base";
 
-const APIKey = "5c415b93-66df-4422-a506-10b9a006532e"
-const APITeams = "http://api.balldontlie.io/v1/teams"
+import Feed from "../components/feed";
 
-const Home = () => {
+import Headbar from "../components/header";
 
-    useEffect(()=>{
-        fetch({})
-    },[])
+const Home = () => {    
+    
 
     return(
-        <View style={styles.container}>
+        <View style={styles.container}>            
+            <Feed />
+            <View style={[styles.container,{flex:0.25}]}>
+                <Text>this works</Text>            
+            </View>
 
+            {/*footer? */}
+            <View style={styles.footer}>
+                <Text>this might be for the footer</Text>
+            </View>            
         </View>
     )
 }
@@ -20,10 +27,19 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
       },
+      footer: {
+        width: '100%',
+        height: '10%',
+        backgroundColor: 'orange',
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      
 })

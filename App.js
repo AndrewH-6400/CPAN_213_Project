@@ -1,12 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Provider } from 'react-redux';
+import Home from './screens/home';
+import Favourites from './screens/favourites';
+import Headbar from './components/header';
+
+const Tab = createBottomTabNavigator();
+
+/*
+screenOptions={ ({route})=>{
+            header : ((navigation,route,options) => {
+              return<Headbar />
+            })
+          }}
+*/
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+    
+        <Tab.Navigator
+          screenOptions={ ({route}) => ({
+            header: ({navigation, route, options}) => {
+              return<Headbar />
+            }
+          })}
+        >
+          <Tab.Screen component={Home} name="Home"/>
+          <Tab.Screen component={Favourites} name="Favourites"/>          
+        </Tab.Navigator>
+        
+    </NavigationContainer>
   );
 }
 
