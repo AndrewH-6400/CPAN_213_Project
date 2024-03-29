@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+
 
 import{
     FETCH_TEAMS_REQUEST,
@@ -39,4 +39,4 @@ const teamReducer = (state = initialState, action) => {
     }
   };
 
-  
+  export default teamReducer;

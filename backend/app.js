@@ -6,13 +6,18 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const cors = require('cors');
 const authRoutes = require('./AuthRoutes');
+const bcrypt = require('bcryptjs');
+
+
+// const AuthController = require('./AuthController');
 
 const app = express();
 const PORT = 8000;
 
 
 //middleware for cors, bodyParserm, sessions
-app.use(cors());
+app.use(cors({origin: true, credentials: true }));
+
 app.use(bodyParser.json());
 app.use(session({
     secret: 'secret',
@@ -24,10 +29,8 @@ app.use(passport.initialize());
 app.use(passport.session());  
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/nba_game_tracker', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect('mongodb://127.0.0.1:27017/nba_game_tracker'); //127.0.0.1 this points back to local machine address
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
@@ -36,7 +39,7 @@ db.once('open', function(){
 });
 
 
-
+const User = require('./User.js'); 
 
 //Passport configuration 
 passport.use(new LocalStrategy(
@@ -66,7 +69,7 @@ passport.use(new LocalStrategy(
 //storying only the user id
 passport.serializeUser((user, done) => {
     console.log("ID in serialize: ", user )
-    connect(null, user.id);//storing user id
+    done(null, user.id);//storing user id
 });
 
 

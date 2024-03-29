@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema({
     age: Number,
     favoriteTeam: String,
     favoritePlayer: String
-}, { collection: 'users' });
+});
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, 'users');

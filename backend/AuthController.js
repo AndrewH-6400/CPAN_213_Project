@@ -1,9 +1,14 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User = require('./User');
+const User = require('./User.js'); 
+
+
+console.log(User);
 
 const register = async (req, res) => {
+    const { username } = req.body;
     try {
-        const existingUser = await user.findOne({ username });
+        const existingUser = await User.findOne({ username });
         if (existingUser) return res.status(400).send({ error: 'username already exists'});
         const hashedPassword = bcrypt.hashSync(req.body.password, 10); //hash password
         const user = new User({ //need to make sure req.body has data, double check this later
@@ -17,10 +22,10 @@ const register = async (req, res) => {
         });
         user.save();
         console.log("User Registered");
-        res.status(201).send("User registered");
+        res.status(201).send("User registered"); //sends status 201 to frontend
     } catch (err) {
         console.error(err);
-        res.status(500).send('Error registering new user');
+        res.status(500).send('Error registering new user'); //sends status 500 to frontent
     }
 }
 
@@ -43,8 +48,8 @@ const login = async (req, res) => {
         const token = jwt.sign({ userId: user._id }, 'yourJWTSecret', { expiresIn: '1h' });
         res.send({ token });
     } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: 'Internal Server Error' });
+        console.error('Internal Server Error:', error);
+        res.status(500).send({ error: 'Internal Server Error: ' + error.message })
     }
 };
 
