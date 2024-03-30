@@ -1,0 +1,170 @@
+[
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 109,
+                "quarterly": [25,23,33,28,109]
+            },
+            {
+                "team": "Washington Wizards",
+                "score": 112,
+                "quarterly": [23,28,26,35,112]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 101,
+                "quarterly": [33,26,21,21,101]
+            },
+            {
+                "team": "New York Knicks",
+                "score": 141,
+                "quarterly": [45,35,31,34,141]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 109,
+                "quarterly": [25,23,33,28,109]
+            },
+            {
+                "team": "Washington Wizards",
+                "score": 112,
+                "quarterly": [23,28,26,35,112]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 101,
+                "quarterly": [33,26,21,21,101]
+            },
+            {
+                "team": "New York Knicks",
+                "score": 141,
+                "quarterly": [45,35,31,34,141]
+            }
+        ]
+    },
+        {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 109,
+                "quarterly": [25,23,33,28,109]
+            },
+            {
+                "team": "Washington Wizards",
+                "score": 112,
+                "quarterly": [23,28,26,35,112]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 101,
+                "quarterly": [33,26,21,21,101]
+            },
+            {
+                "team": "New York Knicks",
+                "score": 141,
+                "quarterly": [45,35,31,34,141]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 109,
+                "quarterly": [25,23,33,28,109]
+            },
+            {
+                "team": "Washington Wizards",
+                "score": 112,
+                "quarterly": [23,28,26,35,112]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 101,
+                "quarterly": [33,26,21,21,101]
+            },
+            {
+                "team": "New York Knicks",
+                "score": 141,
+                "quarterly": [45,35,31,34,141]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 109,
+                "quarterly": [25,23,33,28,109]
+            },
+            {
+                "team": "Washington Wizards",
+                "score": 112,
+                "quarterly": [23,28,26,35,112]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 101,
+                "quarterly": [33,26,21,21,101]
+            },
+            {
+                "team": "New York Knicks",
+                "score": 141,
+                "quarterly": [45,35,31,34,141]
+            }
+        ]
+    },
+        {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 109,
+                "quarterly": [25,23,33,28,109]
+            },
+            {
+                "team": "Washington Wizards",
+                "score": 112,
+                "quarterly": [23,28,26,35,112]
+            }
+        ]
+    },
+    {
+        "data":[
+            {
+                "team": "Toronto Raptors",
+                "score": 101,
+                "quarterly": [33,26,21,21,101]
+            },
+            {
+                "team": "New York Knicks",
+                "score": 141,
+                "quarterly": [45,35,31,34,141]
+            }
+        ]
+    }
+]
