@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
+import Registration from "./Registration";
 import { SpeedDial } from "@rneui/base";
-
 import Feed from "../components/feed";
-
 import Headbar from "../components/header";
 
 const Home = () => {    
