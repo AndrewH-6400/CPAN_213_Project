@@ -22,6 +22,7 @@ const Favourites = () => {
                 openIcon={{name:'close', color:'#fff'}}
                 onOpen={()=>setOpen(!open)}
                 onClose={()=>setOpen(!open)}
+                color="orange"
             >
                 <SpeedDial.Action 
                     icon={<FontAwesomeIcon icon={faStar} color="white"/>}
