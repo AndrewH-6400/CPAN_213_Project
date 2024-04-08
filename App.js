@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import Home from './screens/home';
 import Favourites from './screens/favourites';
 import Headbar from './components/header';
+import store from './redux_store/store/index.js'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,6 +24,7 @@ screenOptions={ ({route})=>{
 
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>                
         <Tab.Navigator
           screenOptions={ ({route}) => ({
@@ -37,8 +39,8 @@ export default function App() {
           <Tab.Screen component={LoginScreen} name="Login"/>          
         </Tab.Navigator>        
     </NavigationContainer>
-  );
-}
+    </Provider>
+)};
 
 const styles = StyleSheet.create({
   container: {

@@ -7,6 +7,7 @@ import statsReducer from './statsReducer';
 import userRegReducer from './userRegReducer';
 
 const rootReducer = combineReducers({
+  //first value is the slice
   teams: teamReducer, 
   players: playerReducer, 
   games: gameReducer,
