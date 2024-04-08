@@ -10,16 +10,13 @@ import Home from './screens/home';
 import Favourites from './screens/favourites';
 import Headbar from './components/header';
 
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import { faHouse, faStar, faList, faUser } from '@fortawesome/free-solid-svg-icons';
+
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-/*
-screenOptions={ ({route})=>{
-            header : ((navigation,route,options) => {
-              return<Headbar />
-            })
-          }}
-*/
 
 export default function App() {
   return (
@@ -27,11 +24,32 @@ export default function App() {
         <Tab.Navigator
           screenOptions={ ({route}) => ({
             header: ({navigation, route, options}) => {
-              return<Headbar />
-            }
+              return<Headbar route={route} />
+            },
+            tabBarIcon: ({focused, color, size}) => {
+              let iconName = faHouse;
+              if (route.name === "Home") {
+                iconName = faHouse;
+              } else if (route.name === "Favourites") {
+                iconName = faStar;
+              } else if (route.name === "Registration") {
+                iconName = faList;                
+              } else if (route.name === "Login") {
+                iconName = faUser;
+                if(focused){
+                  color="orange"
+                } else {
+                  color="grey"
+                }
+              }
+              return<FontAwesomeIcon icon={iconName} color={color}/>
+            },
+            tabBarActiveTintColor: "orange",
+            tabBarInactiveTintColor: "grey"
           })}
+          
         >
-          <Tab.Screen component={Home} name="Home"/>
+          <Tab.Screen component={Home} name="Home" />
           <Tab.Screen component={Favourites} name="Favourites"/>
           <Tab.Screen component={RegistrationScreen} name="Registration"/>
           <Tab.Screen component={LoginScreen} name="Login"/>          

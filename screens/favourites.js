@@ -3,11 +3,15 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { SpeedDial } from "@rneui/base";
 
 import Feed from "../components/feed";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+//import { response } from "express";
 
+const bballUrl = "http://api.balldontlie.io/v1/teams"
 
 const Favourites = () => {    
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false)    
 
     return(
         <View style={styles.container}>
@@ -20,13 +24,13 @@ const Favourites = () => {
                 onClose={()=>setOpen(!open)}
             >
                 <SpeedDial.Action 
-                    icon={{name:'add',color:'#fff'}}
-                    title="Add"
+                    icon={<FontAwesomeIcon icon={faStar} color="white"/>}
+                    title="Favourite?"
                     onPress={()=>console.log("Add something")}
                 />
                 <SpeedDial.Action 
-                    icon={{name:'add',color:'#fff'}}
-                    title="Add"
+                    icon={{name:'remove',color:'#fff'}}
+                    title="Remove"
                     onPress={()=>console.log("Add something")}
                 />
             </SpeedDial>

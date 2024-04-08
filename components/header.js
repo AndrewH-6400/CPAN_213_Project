@@ -1,14 +1,17 @@
 import { View, Text, Button, StyleSheet } from "react-native";
 import { Header } from "@rneui/base";
 
-const Headbar = () => {
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
+import { faBasketball, faQuestion, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
+
+const Headbar = ({route}) => {
     return(
         <Header
             statusBarProps={styles.statusbar}
             containerStyle={styles.container}
-            leftComponent={{ icon: 'menu', color: '#fff' }}
-            centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'home', color: '#fff' }}
+            leftComponent={<FontAwesomeIcon icon={faBasketball} style={styles.icon} size={24}/>}
+            centerComponent={{ text: route.route, style: { color: '#fff' } }}
+            rightComponent={<FontAwesomeIcon icon={faUserAstronaut} style={styles.icon} size={24}/>}
         />
     )
 }
@@ -22,5 +25,9 @@ const styles = StyleSheet.create({
     },
     statusbar: {
         backgroundColor: 'orange'
+    },
+    icon: {
+        color: 'white',
+        
     }
 })
