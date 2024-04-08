@@ -12,6 +12,9 @@ const initialState = {
   };
   
   const gameReducer = (state = initialState, action) => {
+    // console.log("Action:", action); // Log the action object
+    // console.log("Current State:", state); // Log the current state object
+
     switch (action.type) {
       case FETCH_GAMES_REQUEST:
         return {

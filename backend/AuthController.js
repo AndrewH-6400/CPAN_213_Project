@@ -45,7 +45,7 @@ const login = async (req, res) => {
             return res.status(401).send({ error: 'Invalid username or password' });
         }
         // Create a JWT token
-        const token = jwt.sign({ userId: user._id }, 'yourJWTSecret', { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, 'yourJWTSecret', { expiresIn: '1h' }); //generating token just for username
         res.send({ token });
     } catch (error) {
         console.error('Internal Server Error:', error);

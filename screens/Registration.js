@@ -26,7 +26,7 @@ const RegistrationScreen = ({ navigation }) => {
             };
             console.log('Request Data:', requestData);
 
-            const response = await axios.post('http://192.168.2.16:8000/auth/register', requestData);
+            const response = await axios.post('http://192.168.2.16:8000/auth/register', requestData); //use local ip address
             console.log('Registration response:', response.data);
 
             if (response.status === 201) {
