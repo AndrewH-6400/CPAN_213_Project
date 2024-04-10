@@ -5,7 +5,7 @@ import LoginScreen from './screens/login.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import GameDetailsScreen from './screens/gameView.js';
 import Home from './screens/home';
 import Favourites from './screens/favourites';
 import Headbar from './components/header';
@@ -13,7 +13,8 @@ import store from './redux_store/store/index.js'
 import { useSelector } from 'react-redux';
 import Account from './screens/Account.js';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { faHouse, faStar, faList, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faList, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
+import PlayerView from './screens/playerView.js';
 
 
 const Stack = createStackNavigator();
@@ -37,7 +38,7 @@ export default function AppWrapper() {
                 if (route.name === "Home") {
                   iconName = faHouse;
                 } else if (route.name === "Favourites") {
-                  iconName = faStar;
+                  iconName = faSearch;
                 } else if (route.name === "Registration") {
                   iconName = faList;                
                 } else if (route.name === "Login" || route.name === "Account") {
@@ -49,14 +50,14 @@ export default function AppWrapper() {
                   }
                 }
                 return<FontAwesomeIcon icon={iconName} color={color}/>
-              },
+              },              
               tabBarActiveTintColor: "orange",
               tabBarInactiveTintColor: "grey"
             })}
             
           >
             <Tab.Screen component={Home} name="Home" />
-            <Tab.Screen component={Favourites} name="Favourites"/>
+            <Tab.Screen component={Favourites} name="Favourites" options={{tabBarLabel: "Search"}}/>
             {isLoggedIn == "false" &&
                 <Tab.Screen component={RegistrationScreen} name="Registration"/>
             }
@@ -65,7 +66,10 @@ export default function AppWrapper() {
             :
                 <Tab.Screen component={LoginScreen} name="Login"/>
             }                   
+            <Tab.Screen component={GameDetailsScreen} name="GameView" options={{tabBarVisible: false, tabBarButton: ()=> null}}/>  
+            <Tab.Screen component={PlayerView} name="PlayerView" options={{tabBarVisible: false, tabBarButton: ()=> null}}/>  
           </Tab.Navigator>        
+          
       </NavigationContainer>
     
 )};

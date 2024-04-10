@@ -1,9 +1,12 @@
-import { View,Text,StyleSheet, FlatList } from "react-native";
+import { View,Text,StyleSheet, FlatList, TouchableOpacity  } from "react-native";
 import { Image } from "react-native";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
+import { Card } from "@rneui/base";
 import * as Progress from 'react-native-progress';
+import { useNavigation } from '@react-navigation/native';
+
 // import data from './feed.json';
 import axios from "axios";
 import DenverNuggetsLogo from '../assets/Denver Nuggets.png';
@@ -121,7 +124,18 @@ const Feed = () => {
         25:PortlandTrailBlazers
     }
 
+    const navigation = useNavigation();
+    //pass parameter gameId from item.id
+    const handleGameItemClick = (gameId) => { 
+        // Navigate to the specific game's view with the gameId
+        navigation.navigate('GameView', { gameId }); //create gameView obj to nav to
+        // gameId : gameId if paramter and var do not have the same name
+    };
+
+
     const renderGameItem = ({ item }) => (
+        // bind handleGameItemClick function to Onpress
+        <TouchableOpacity onPress={() => handleGameItemClick(item.id)}> 
         <View style={styles.card}>
             <View style={styles.homeContainer}>
                 <Image source={teamLogos[item.home_team.id]} style={styles.teamLogo} />
@@ -144,6 +158,7 @@ const Feed = () => {
             </View>
             
         </View>
+        </TouchableOpacity>
     );
     return (
         <FlatList
