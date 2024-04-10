@@ -1,13 +1,21 @@
-import { faHippo, faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
+import { faHippo } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { avatarChange } from "../redux_store/actions/userRegAction";
 
 
 const Account = () => {    
     user = useSelector(state => state.user.user)
-
+    dispatch = useDispatch()
+    //faCat, faChessBishop, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook, faCrow, faDog, faDragon, faFish, faFrog, faHatWizard, faHippo, faMoneyBill, faPerson, faPersonDress, faPersonMilitaryPointing, faPersonSkiing, faSkull, faUserAstronaut, faUserSecret, faUserTie
+    const icons = [
+        "person", "person-dress", "person-skiing", "user-tie", "user-secret", "user-astronaut",
+        "dog", "cat", "crow","fish","frog","dragon",
+        "chess-pawn","chess-rook","chess-bishop","chess-knight","chess-queen","chess-king",
+    ]
     return(
 
         <View style={styles.container}>            
@@ -31,9 +39,16 @@ const Account = () => {
                         <Text style={styles.text}>{user.favoriteTeam}</Text>                
                     </View>
                 </View>
-                <View style={styles.iconSelect}>
-                    <Text style={[styles.text,{fontWeight:'bold', width: '100%'}]}>Select Your Avatar!:{'\n'}</Text>
-                    <FontAwesomeIcon icon={faUserAstronaut}/>
+                <Text style={[styles.text,{fontWeight:'bold', color:'black'}]}>Select Your Avatar!</Text>                    
+                <View style={styles.iconSelect}>        
+                    {icons.map((icon,id)=>{
+                        return(
+                            <TouchableOpacity id={id} onPress={()=>dispatch(avatarChange(icon))}>
+                                <FontAwesomeIcon icon={icon} style={styles.icon} size={40}/>
+                            </TouchableOpacity>
+                        )
+                    })}                    
+                    
                 </View>
                 <View >
                     <FontAwesomeIcon icon={faHippo}/>
@@ -59,7 +74,8 @@ const styles = StyleSheet.create({
         flex: 0.25,        
         backgroundColor: 'white',
         width: '100%',        
-        justifyContent: 'space-between',        
+        justifyContent: 'space-between',     
+        padding: 10,   
       },
       line: {
         flexDirection: 'row',
@@ -71,9 +87,20 @@ const styles = StyleSheet.create({
       iconSelect: {
         backgroundColor: "orange",
         width: '100%',
-        flex: 0.5,
+        flex: 0.35,
+        flexWrap: 'wrap',
         flexDirection: 'row',
-        
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+        // borderColor: 'black',
+        // borderStyle: 'solid',
+        // borderWidth: 5,
+      },
+      icon: {
+        color: 'white',
+        marginHorizontal: 10,
+        marginVertical: 20,        
       },
       footer: {
         width: '100%',

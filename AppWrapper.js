@@ -15,6 +15,9 @@ import Account from './screens/Account.js';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faHouse, faList, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
 import PlayerView from './screens/playerView.js';
+import { faCat, faChessBishop, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook, faCrow, faDog, faDragon, faFish, faFrog, faHatWizard, faHippo, faMoneyBill, faPerson, faPersonDress, faPersonMilitaryPointing, faPersonSkiing, faSkull, faUserAstronaut, faUserSecret, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+library.add(faUser, faCat, faChessBishop, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook, faCrow, faDog, faDragon, faFish, faFrog, faHatWizard, faHippo, faMoneyBill, faPerson, faPersonDress, faPersonMilitaryPointing, faPersonSkiing, faSkull, faUserAstronaut, faUserSecret, faUserTie)
 
 
 const Stack = createStackNavigator();

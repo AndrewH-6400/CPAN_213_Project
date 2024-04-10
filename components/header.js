@@ -1,16 +1,23 @@
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 import { Header } from "@rneui/base";
+import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { faBasketball, faQuestion, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
+
 
 const Headbar = ({navigation}) => {
+    avatar = useSelector(state=>state.user.avatar);
+
     return(
         <Header
             statusBarProps={styles.statusbar}
             containerStyle={styles.container}
             leftComponent={<TouchableOpacity onPress={()=>navigation.navigate("Home")}><FontAwesomeIcon icon={faBasketball} style={styles.icon} size={24} /></TouchableOpacity>}           
-            rightComponent={<FontAwesomeIcon icon={faUserAstronaut} style={styles.icon} size={24}/>}
+            rightComponent={
+                avatar != null &&
+                <FontAwesomeIcon icon={avatar} style={styles.icon} size={24}/>
+            }
         />
     )
 }

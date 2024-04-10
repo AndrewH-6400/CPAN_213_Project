@@ -30,13 +30,12 @@ const RegistrationScreen = ({ navigation }) => {
             };
             console.log('Request Data:', requestData);
             dispatch(registerUser(requestData));
-            console.log(useSelector(state => state.isLoggedIn))
             const response = await axios.post('http://192.168.2.28:8000/auth/register', requestData); //use local ip address
             console.log('Registration response:', response.data);
 
             if (response.status === 201) {
                 Alert.alert('Success', 'User registered successfully');
-                navigation.navigate('Login')
+                navigation.navigate('Home')
             } else {
                 Alert.alert('Error', 'Failed to register user');
             }
