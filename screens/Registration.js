@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux_store/actions/userRegAction';
@@ -46,6 +46,7 @@ const RegistrationScreen = ({ navigation }) => {
     };
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             <Text style={styles.label}>Username:</Text>
             <TextInput
@@ -106,6 +107,7 @@ const RegistrationScreen = ({ navigation }) => {
 
             <Button title="Register" onPress={handleRegister} />
         </View>
+        </ScrollView>
     );
 };
 
