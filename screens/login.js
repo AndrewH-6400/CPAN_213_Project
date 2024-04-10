@@ -19,11 +19,12 @@ const LoginScreen = ({navigation}) => {
             username,
             password    
         });
-        console.log('Login Successful')        
-        dispatch(logIn(response.user))
-        //console.log(useSelector(state => state.user.isLoggedIn))
-        // const user = await axios.get("http://192.168.2.28:8000/auth/getInfo",{username,password})
-        // dispatch(logIn(user));
+        //console.log('Login Successful'+JSON.stringify(response.data))        
+        console.log('Login Successful'+JSON.stringify(response.data.user.username))        
+        //console.log('Login Successful'+response.data)
+        dispatch(logIn(response.data.user))
+        
+        
         //create a notifcation for user to see login was successful
         Alert.alert('Login Successful')
         navigation.navigate('Home')

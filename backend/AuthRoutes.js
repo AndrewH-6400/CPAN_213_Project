@@ -13,9 +13,6 @@ router.post('/login', passport.authenticate('local'), authController.login);
 // Logout endpoint
 router.get('/logout', authController.logout);
 
-// Get info endpoint
-router.get('/getInfo',authController.getInfo);
-
 // Session check endpoint
 router.get('/sessionCheck', authController.sessionCheck);
 

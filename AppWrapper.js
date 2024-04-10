@@ -58,7 +58,7 @@ export default function AppWrapper() {
             <Tab.Screen component={Home} name="Home" />
             <Tab.Screen component={Favourites} name="Favourites"/>
             {isLoggedIn == "false" &&
-            <Tab.Screen component={RegistrationScreen} name="Registration"/>
+                <Tab.Screen component={RegistrationScreen} name="Registration"/>
             }
             {isLoggedIn == "true"? 
                 <Tab.Screen component={Account} name="Account"/>

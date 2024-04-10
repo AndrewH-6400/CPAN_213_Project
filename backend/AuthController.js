@@ -46,36 +46,12 @@ const login = async (req, res) => {
         }
         // Create a JWT token
         const token = jwt.sign({ userId: user._id }, 'yourJWTSecret', { expiresIn: '1h' }); //generating token just for username
-        res.send({ token }, {user});
+        res.send({ user });
     } catch (error) {
         console.error('Internal Server Error:', error);
         res.status(500).send({ error: 'Internal Server Error: ' + error.message })
     }
 };
-
-const getInfo = async (req, res) => {
-    const {username, password} = req.body;
-    console.log("getting info")
-    try {
-        const user = await User.findOne({ username });
-        if (!user) {
-            console.log('User not found while trying to login in');
-            return res.status(401).send({ error: 'Invalid username or password' });
-        }
-        // Check if password is correct
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            console.log('Password does not match');
-            return res.status(401).send({ error: 'Invalid username or password' });
-        }
-        
-        console.log("This is user"+{user})
-        res.send(user);
-    } catch(error) {
-        console.error('Internal Server Error:', error);
-        res.status(500).send({ error: 'Internal Server Error: ' + error.message })
-    }
-}
 
 //logout
 const logout = (req,res) => {
@@ -101,5 +77,4 @@ module.exports = {
     login,
     logout,
     sessionCheck,
-    getInfo
 };
