@@ -4,6 +4,12 @@ import { View, Text, TextInput, StyleSheet, ActivityIndicator } from 'react-nati
 import axios from 'axios'; 
 import { useDispatch } from 'react-redux'; 
 import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
+
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
+import axios from 'axios'; 
+import { useDispatch } from 'react-redux'; 
+import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
 import Feed from "../components/feed";
 import Headbar from "../components/header";
 
@@ -80,7 +86,11 @@ const Home = () => {
             <View style={styles.footer}>
                 <Text>Welcome to the NBA Score App</Text>
             </View>
+                <Text>Welcome to the NBA Score App</Text>
+            </View>
         </View>
+    );
+};
     );
 };
 
@@ -88,6 +98,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    searchContainer: {
+        width: '100%',
+        backgroundColor: 'orange',
+        padding: 10,
+    },
+    searchBar: {
+        height: 40,
+        backgroundColor: '#fff',
+        paddingHorizontal: 15,
+        borderRadius: 20,
+        fontSize: 16,
+    },
+    feedContainer: {
+        flex: 1,
+        width: '100%',
+    },
+    footer: {
     },
     searchContainer: {
         width: '100%',
