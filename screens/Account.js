@@ -11,7 +11,7 @@ const Account = () => {
         <View style={styles.container}>            
             
             <View style={[styles.container]}>
-                <Text>{}</Text>            
+                <Text>{user.username}</Text>            
             </View>
 
             {/*footer? */}
