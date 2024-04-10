@@ -1,6 +1,5 @@
-import { View,Text,StyleSheet, FlatList, TouchableOpacity  } from "react-native";
-import { Image } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
 import { Card } from "@rneui/base";
@@ -38,43 +37,38 @@ import WashingtonWizardsLogo from '../assets/Washington Wizards.png';
 import BostonCelticsLogo from '../assets/Boston Celtics.png';
 import DetroitPistonsLogo from '../assets/Detroit Pistons.png';
 import MinnesotaTimberwolvesLogo from '../assets/Minnesota Timberwolves.png';
-import PortlandTrailBlazers from '../assets/Portland Trail Blazers.png'
-
-
+import PortlandTrailBlazers from '../assets/Portland Trail Blazers.png';
 
 const Feed = () => {
     const dispatch = useDispatch();
-    const {games, loading, error} = useSelector(state => state.games); //exstract data from redux store
-    //{ games, loading, error } deconstructing task to extract properties from state in redux store
+    const { games, loading, error } = useSelector(state => state.games);//exstract data from redux 
+     //{ games, loading, error } deconstructing task to extract properties from state in redux store
     //I am selecting the game slice in actions. game is the key, I can name it anything(it should be constant with redux store) but the key accesses the state i created it in the reducer
     //console.log('Redux State check: ', games);
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(fetchGamesRequest());
 
-        axios.get('https://api.balldontlie.io/v1/games?seasons[]=2023&seasons[]=2024',{
-            
+        axios.get('https://api.balldontlie.io/v1/games?seasons[]=2023&seasons[]=2024', {
             headers: {
-                Authorization: '87bdef63-ca65-4043-b674-932fe6c60bb3' //Bearer is a type of access toekn for authentication
+                Authorization: '87bdef63-ca65-4043-b674-932fe6c60bb3'
             }
         })
-        .then(response => {
-            //console.log("Api Response:", response.data) //logging response from api
-            dispatch(fetchGamesSuccess(response.data.data)); //response.data returns HTTP response when using AXIOS, this is accessed with data property. 
-            //data.data is becaues the data is an array of objs. So data will look within the array of Data and .data will go within that array to exstract data
-            //dispatch will dispatch this action to the Redux store by passing the array of objs, as payload fetchGame
-        })
-        .catch(error => {
-            console.error("API errorL ", error)
-            dispatch(fetchGamesFailure(error.message)) //message is property of error, error.message is extracting that error
-        });
-
-
+            .then(response => {
+                //console.log("Api Response:", response.data) //logging response from api
+                dispatch(fetchGamesSuccess(response.data.data));
+                //data.data is becaues the data is an array of objs. 
+                //So data will look within the array of Data and .data will go within that array to exstract data
+            })
+            .catch(error => {
+                console.error("API error: ", error)
+                dispatch(fetchGamesFailure(error.message))
+            
+            });
     }, []); //ensures that useEffect is only executed once when component mounts
 
-
-    //rending loading state with circle animation 
-    if(loading) {
-        return(
+     //rending loading state with circle animation 
+    if (loading) {
+        return (
             <View style={styles.loadingContainer}>
                 <Progress.Circle
                     size={50} color='blue' borderWidth={5}
@@ -84,12 +78,10 @@ const Feed = () => {
     }
 
     //error rendering from state
+
     if (error) {
         return <Text>Error: {error}</Text>
     }
-    // const quarterlyString = (quarterly) => {
-    //     return(`${quarterly[0]} - ${quarterly[1]} - ${quarterly[2]} - ${quarterly[3]} - ${quarterly[4]}`)        
-    // }
 
     const teamLogos = {
         8: DenverNuggetsLogo,
@@ -121,45 +113,41 @@ const Feed = () => {
         2: BostonCelticsLogo,
         9: DetroitPistonsLogo,
         18: MinnesotaTimberwolvesLogo,
-        25:PortlandTrailBlazers
+        25: PortlandTrailBlazers
     }
 
     const navigation = useNavigation();
-    //pass parameter gameId from item.id
-    const handleGameItemClick = (gameId) => { 
-        // Navigate to the specific game's view with the gameId
-        navigation.navigate('GameView', { gameId }); //create gameView obj to nav to
-        // gameId : gameId if paramter and var do not have the same name
+
+    const handleGameItemClick = (gameId) => {
+        navigation.navigate('GameView', { gameId });
     };
 
-
     const renderGameItem = ({ item }) => (
-        // bind handleGameItemClick function to Onpress
-        <TouchableOpacity onPress={() => handleGameItemClick(item.id)}> 
-        <View style={styles.card}>
-            <View style={styles.homeContainer}>
-                <Image source={teamLogos[item.home_team.id]} style={styles.teamLogo} />
-                <View style={styles.textContainer}>
-                    <Text style={styles.teamName}>{item.home_team.full_name}</Text>
-                    <Text style={styles.teamScore}>{item.home_team_score}</Text>
+        <TouchableOpacity onPress={() => handleGameItemClick(item.id)}>
+            <View style={styles.card}>
+                <View style={styles.homeContainer}>
+                    <Image source={teamLogos[item.home_team.id]} style={styles.teamLogo} />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.teamName}>{item.home_team.full_name}</Text>
+                        <Text style={styles.teamScore}>{item.home_team_score}</Text>
+                    </View>
+                </View>
+                <View style={styles.visitorContainer}>
+                    <Image source={teamLogos[item.visitor_team.id]} style={styles.teamLogo} />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.teamName}>{item.visitor_team.full_name}</Text>
+                        <Text style={styles.teamScore}>{item.visitor_team_score}</Text>
+                    </View>
+                </View>
+                <View style={styles.gameInfo}>
+                    {/* <Text style={styles.quarterInfo}>Period: {item.period}</Text>
+                    <Text style={styles.quarterInfo}>Status: {item.status}</Text> */}
+                    {/* <Text style={styles.quarterInfo}>Date: {item.date}</Text> */}
                 </View>
             </View>
-            <View style={styles.visitorContainer}>
-                <Image source={teamLogos[item.visitor_team.id]} style={styles.teamLogo} />
-                <View style={styles.textContainer}>
-                    <Text style={styles.teamName}>{item.visitor_team.full_name}</Text>
-                    <Text style={styles.teamScore}>{item.visitor_team_score}</Text>
-                </View>
-            </View>
-            <View style={styles.gameInfo}>
-                {/* <Text style={styles.quarterInfo}>Period: {item.period}</Text>
-                <Text style={styles.quarterInfo}>Status: {item.status}</Text> */}
-                {/* <Text style={styles.quarterInfo}>Date: {item.date}</Text> */}
-            </View>
-            
-        </View>
         </TouchableOpacity>
     );
+
     return (
         <FlatList
             style={styles.feed}
@@ -168,10 +156,9 @@ const Feed = () => {
             renderItem={renderGameItem}
         />
     );
-
 }
 
-export default Feed
+export default Feed;
 
 const styles = StyleSheet.create({
     feed: {
@@ -180,7 +167,7 @@ const styles = StyleSheet.create({
     teamLogo: {
         width: 75,
         height: 75,
-        resizeMode: 'contain', 
+        resizeMode: 'contain',
     },
     textContainer: {
         alignItems: 'center',
@@ -197,37 +184,31 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.3,
         shadowRadius: 5,
-        elevation: 5, 
+        elevation: 5,
         width: '95%',
-        alignItems: 'center',                
+        alignItems: 'center',
     },
     container: {
         flexDirection: 'column',
         alignItems: 'center',
-        
+
     },
     homeContainer: {
-        paddingRight: 40,        
-        flex: 1,   
-        alignItems: 'center',             
+        paddingRight: 40,
+        flex: 1,
+        alignItems: 'center',
     },
     visitorContainer: {
         paddingLeft: 40,
         flex: 1,
-        alignItems: 'center',     
+        alignItems: 'center',
     },
     textContainer: {
         alignItems: 'center',
     },
-    // score: {
-    //     flex: 1,
-    //     flexDirection: 'column',
-    //     justifyContent: 'flex-start',
-    //     alignItems: 'flex-end',
-    // },
     gameInfo: {
-        alignSelf: 'center', 
-        marginTop: 10, 
+        alignSelf: 'center',
+        marginTop: 10,
     },
     loadingContainer: {
         flex: 1,
@@ -244,8 +225,4 @@ const styles = StyleSheet.create({
     teamScore: {
         fontWeight: 'bold',
     },
-    // quarterInfo: {
-    //     fontSize: 12,
-    //     marginBottom: 2,
-    // },
 });

@@ -14,23 +14,28 @@ const LoginScreen = ({navigation}) => {
 
     const handleLogin = async () => {        
         try {
-            const response = await axios.post('http://192.168.2.28:8000/auth/login', 
-            {
-            username,
-            password    
-        });
-        //console.log('Login Successful'+JSON.stringify(response.data))        
-        console.log('Login Successful'+JSON.stringify(response.data.user.username))        
-        //console.log('Login Successful'+response.data)
-        dispatch(logIn(response.data.user))
-        
-        
-        //create a notifcation for user to see login was successful
-        Alert.alert('Login Successful')
-        navigation.navigate('Home')
+            const response = await axios.post('http://192.168.2.16:8000/auth/login', {
+                username,
+                password    
+            });
+    
+            // Check if response status is 200
+            if (response.status === 200) {
+                // Assuming response.data.user is present
+                console.log('Login Successful' + JSON.stringify(response.data.user.username));
+                dispatch(logIn(response.data.user));
+                //create a notification for the user to see login was successful
+                Alert.alert('Login Successful');
+                navigation.navigate('Home');
+            } else {
+                // Handle unexpected response status
+                console.error('Unexpected response:', response);
+                Alert.alert('Login Failed', 'Unexpected response from the server');
+            }
         } catch (error) {
-            console.error('Login failed: ', error.response.data.error)  //error at this data
-            Alert.alert('Login Failed', error.response.data.error) //this exstracts the error from my login function in my backend
+            // Handle request or response errors
+            console.error('Login failed: ', error.response ? error.response.data.error : error.message);
+            Alert.alert('Login Failed', error.response ? error.response.data.error : error.message);
         }
     };
 
