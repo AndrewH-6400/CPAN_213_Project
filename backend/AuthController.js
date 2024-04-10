@@ -46,13 +46,12 @@ const login = async (req, res) => {
         }
         // Create a JWT token
         const token = jwt.sign({ userId: user._id }, 'yourJWTSecret', { expiresIn: '1h' }); //generating token just for username
-        res.send({ token });
+        res.send({ user });
     } catch (error) {
         console.error('Internal Server Error:', error);
         res.status(500).send({ error: 'Internal Server Error: ' + error.message })
     }
 };
-
 
 //logout
 const logout = (req,res) => {
@@ -77,5 +76,5 @@ module.exports = {
     register,
     login,
     logout,
-    sessionCheck
+    sessionCheck,
 };

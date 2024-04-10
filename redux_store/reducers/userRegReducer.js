@@ -1,9 +1,10 @@
-import { REGISTER_USER } from "../actions/userRegAction"
+import { REGISTER_USER, LOGIN } from "../actions/userRegAction"
 
 const initialState = {
     user: [],
+    isLoggedIn: "false",
     loading: false,
-    error: null
+    error: null,
 };
 
 const userRegReducer = (state = initialState, action) => {
@@ -12,10 +13,18 @@ const userRegReducer = (state = initialState, action) => {
             return{
                 ...state,
                 user: action.payload,
+                isLoggedIn: "true",
             };
+        case LOGIN:
+            return{
+                ...state,
+                user: action.payload,
+                isLoggedIn: "true",
+            }
         default:
             return state;
     }
 };
+
 
 export default userRegReducer;

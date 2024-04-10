@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { CheckBox } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../redux_store/actions/userRegAction';
 import axios from 'axios';
 
 const RegistrationScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -25,8 +29,9 @@ const RegistrationScreen = ({ navigation }) => {
                 favoritePlayer,
             };
             console.log('Request Data:', requestData);
-
-            const response = await axios.post('http://192.168.2.16:8000/auth/register', requestData); //use local ip address
+            dispatch(registerUser(requestData));
+            console.log(useSelector(state => state.isLoggedIn))
+            const response = await axios.post('http://192.168.2.28:8000/auth/register', requestData); //use local ip address
             console.log('Registration response:', response.data);
 
             if (response.status === 201) {
