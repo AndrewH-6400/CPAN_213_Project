@@ -1,8 +1,8 @@
 import { faHippo } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { useEffect, useState, useRef } from "react";
+import { View, Text, Button, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { avatarChange } from "../redux_store/actions/userRegAction";
 
@@ -16,6 +16,23 @@ const Account = () => {
         "dog", "cat", "crow","fish","frog","dragon",
         "chess-pawn","chess-rook","chess-bishop","chess-knight","chess-queen","chess-king",
     ]
+
+    const y = useRef(new Animated.Value(0)).current
+    handleChange = () => {
+        Animated.sequence([
+            Animated.timing(y,{
+                toValue: 50,
+                duration: 100,
+                useNativeDriver: false
+            }),
+            Animated.timing(y,{
+                toValue: 0,
+                duration: 100,
+                useNativeDriver: false
+            }),
+        ]).start()
+    }
+
     return(
 
         <View style={styles.container}>            
@@ -41,18 +58,27 @@ const Account = () => {
                 </View>
                 <Text style={[styles.text,{fontWeight:'bold', color:'black'}]}>Select Your Avatar!</Text>                    
                 <View style={styles.iconSelect}>        
-                    {icons.map((icon,id)=>{
+                    {icons.map((icon)=>{
                         return(
-                            <TouchableOpacity id={id} onPress={()=>dispatch(avatarChange(icon))}>
+                            <TouchableOpacity key={icon} onPress={()=>{
+                                dispatch(avatarChange(icon))
+                                handleChange()
+                            }
+                            }>
                                 <FontAwesomeIcon icon={icon} style={styles.icon} size={40}/>
                             </TouchableOpacity>
                         )
                     })}                    
                     
                 </View>
-                <View >
-                    <FontAwesomeIcon icon={faHippo}/>
-                </View>
+                <Animated.View
+                    style={{
+                        position: 'relative',
+                        bottom: y
+                    }}
+                >
+                    <FontAwesomeIcon icon={faHippo} size={25}/>
+                </Animated.View>
                 
             </View>                     
         </View>

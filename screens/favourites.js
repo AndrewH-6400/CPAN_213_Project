@@ -114,11 +114,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 20,
         marginRight: 10,
+        marginTop: 15,
     },
     searchButton: {
         backgroundColor: 'grey',
         padding: 10,
         borderRadius: 20,
+        marginTop: 15,
     },
     footer: {
         width: '100%',
