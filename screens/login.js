@@ -1,23 +1,32 @@
 const { useState } = require("react");
 const { Alert, View, TextInput, TouchableOpacity, StyleSheet, Text } = require("react-native");
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { logIn } from '../redux_store/actions/userRegAction';
 
 
 
-const LoginScreen = () => {
+
+const LoginScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    dispatch = useDispatch();
 
-
-    const handleLogin = async () => {
+    const handleLogin = async () => {        
         try {
-            const response = await axios.post('http://192.168.2.16:8000/auth/login', {
+            const response = await axios.post('http://192.168.2.28:8000/auth/login', 
+            {
             username,
             password    
         });
-        console.log('Login Successful')
+        console.log('Login Successful')        
+        dispatch(logIn(response.user))
+        //console.log(useSelector(state => state.user.isLoggedIn))
+        // const user = await axios.get("http://192.168.2.28:8000/auth/getInfo",{username,password})
+        // dispatch(logIn(user));
         //create a notifcation for user to see login was successful
         Alert.alert('Login Successful')
+        navigation.navigate('Home')
         } catch (error) {
             console.error('Login failed: ', error.response.data.error)  //error at this data
             Alert.alert('Login Failed', error.response.data.error) //this exstracts the error from my login function in my backend

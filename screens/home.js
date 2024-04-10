@@ -4,6 +4,8 @@ import Registration from "./Registration";
 import { SpeedDial } from "@rneui/base";
 import Feed from "../components/feed";
 import Headbar from "../components/header";
+import { useSelector } from "react-redux";
+
 
 const Home = () => {    
     
@@ -12,7 +14,7 @@ const Home = () => {
         <View style={styles.container}>            
             <Feed />
             <View style={[styles.container,{flex:0.25}]}>
-                <Text>this works</Text>            
+                <Text>{useSelector(state => state.user.isLoggedIn)}</Text>            
             </View>
 
             {/*footer? */}

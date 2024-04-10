@@ -3,7 +3,6 @@ import { Image } from "react-native";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
-import { Card } from "@rneui/base";
 import * as Progress from 'react-native-progress';
 // import data from './feed.json';
 import axios from "axios";
