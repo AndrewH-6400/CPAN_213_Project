@@ -10,6 +10,8 @@ import Home from './screens/home';
 import Favourites from './screens/favourites';
 import Headbar from './components/header';
 import store from './redux_store/store/index.js'
+import GameViewScreen from './screens/gameView';
+import PlayerViewScreen from './screens/playerView';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,7 +38,9 @@ export default function App() {
           <Tab.Screen component={Home} name="Home"/>
           <Tab.Screen component={Favourites} name="Favourites"/>
           <Tab.Screen component={RegistrationScreen} name="Registration"/>
-          <Tab.Screen component={LoginScreen} name="Login"/>          
+          <Tab.Screen component={LoginScreen} name="Login"/> 
+          <Tab.Screen component={GameViewScreen} name="GameView" />
+          <Tab.Screen component={PlayerViewScreen} name="PlayerView"/>         
         </Tab.Navigator>        
     </NavigationContainer>
     </Provider>

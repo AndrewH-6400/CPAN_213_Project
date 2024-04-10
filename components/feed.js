@@ -1,10 +1,12 @@
-import { View,Text,StyleSheet, FlatList } from "react-native";
+import { View,Text,StyleSheet, FlatList, TouchableOpacity  } from "react-native";
 import { Image } from "react-native";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
 import { Card } from "@rneui/base";
 import * as Progress from 'react-native-progress';
+import { useNavigation } from '@react-navigation/native';
+
 // import data from './feed.json';
 import axios from "axios";
 import DenverNuggetsLogo from '../assets/Denver Nuggets.png';
@@ -45,7 +47,7 @@ const Feed = () => {
     const {games, loading, error} = useSelector(state => state.games); //exstract data from redux store
     //{ games, loading, error } deconstructing task to extract properties from state in redux store
     //I am selecting the game slice in actions. game is the key, I can name it anything(it should be constant with redux store) but the key accesses the state i created it in the reducer
-    console.log('Redux State check: ', games);
+    //console.log('Redux State check: ', games);
     useEffect(()=> {
         dispatch(fetchGamesRequest());
 
@@ -56,7 +58,7 @@ const Feed = () => {
             }
         })
         .then(response => {
-            console.log("Api Response:", response.data) //logging response from api
+            //console.log("Api Response:", response.data) //logging response from api
             dispatch(fetchGamesSuccess(response.data.data)); //response.data returns HTTP response when using AXIOS, this is accessed with data property. 
             //data.data is becaues the data is an array of objs. So data will look within the array of Data and .data will go within that array to exstract data
             //dispatch will dispatch this action to the Redux store by passing the array of objs, as payload fetchGame
@@ -122,7 +124,18 @@ const Feed = () => {
         25:PortlandTrailBlazers
     }
 
+    const navigation = useNavigation();
+    //pass parameter gameId from item.id
+    const handleGameItemClick = (gameId) => { 
+        // Navigate to the specific game's view with the gameId
+        navigation.navigate('GameView', { gameId }); //create gameView obj to nav to
+        // gameId : gameId if paramter and var do not have the same name
+    };
+
+
     const renderGameItem = ({ item }) => (
+        // bind handleGameItemClick function to Onpress
+        <TouchableOpacity onPress={() => handleGameItemClick(item.id)}> 
         <View style={styles.card}>
             <View style={styles.homeContainer}>
                 <Image source={teamLogos[item.home_team.id]} style={styles.teamLogo} />
@@ -145,6 +158,7 @@ const Feed = () => {
             </View>
             
         </View>
+        </TouchableOpacity>
     );
     return (
         <FlatList
@@ -172,6 +186,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: 'white',
@@ -183,19 +198,23 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 5,
         elevation: 5, 
-        alignItems: 'center'
+        width: '95%',
+        alignItems: 'center',                
     },
     container: {
         flexDirection: 'column',
         alignItems: 'center',
+        
     },
     homeContainer: {
-        marginRight: 40,
+        paddingRight: 40,        
+        flex: 1,   
+        alignItems: 'center',             
     },
     visitorContainer: {
-        marginLeft: 40,
-        
-        
+        paddingLeft: 40,
+        flex: 1,
+        alignItems: 'center',     
     },
     textContainer: {
         alignItems: 'center',
