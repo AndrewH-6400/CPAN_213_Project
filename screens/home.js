@@ -1,9 +1,4 @@
 
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
-import axios from 'axios'; 
-import { useDispatch } from 'react-redux'; 
-import { fetchGamesRequest, fetchGamesSuccess, fetchGamesFailure } from '../redux_store/actions/gamesAction';
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
@@ -86,11 +81,8 @@ const Home = () => {
             <View style={styles.footer}>
                 <Text>Welcome to the NBA Score App</Text>
             </View>
-                <Text>Welcome to the NBA Score App</Text>
+                
             </View>
-        </View>
-    );
-};
     );
 };
 

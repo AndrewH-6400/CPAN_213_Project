@@ -31,7 +31,7 @@ export default function AppWrapper() {
           <Tab.Navigator
             screenOptions={ ({route}) => ({
               header: ({navigation, route, options}) => {
-                return<Headbar route={route} />
+                return<Headbar navigation={navigation} />
               },
               tabBarIcon: ({focused, color, size}) => {
                 let iconName = faHouse;
