@@ -183,10 +183,10 @@ const GameDetailsScreen = ({ route }) => {
                         </Text> */}
                         {/* Add more game details here */}
                     </View>
-                    <View style={styles.playersContainer}>
-    <View style={styles.homeTeamPlayers}>
-        <Text style={styles.teamPlayersHeader}>{gameDetails.home_team.full_name} Players:</Text>
-        <View style={styles.playerTable}>
+            <View style={styles.playersContainer}>
+                <View style={styles.homeTeamPlayers}>
+                 <Text style={styles.teamPlayersHeader}>{gameDetails.home_team.full_name} Players:</Text>
+                 <View style={styles.playerTable}>
             <View style={styles.tableHeader}>
                 <Text style={styles.headerText}>Player</Text>
                 <Text style={styles.headerText}>PTS</Text>
@@ -310,7 +310,7 @@ const GameDetailsScreen = ({ route }) => {
           alignItems: 'center',
         },
         playersContainer: {
-          flexDirection: 'row',
+          flexDirection: 'column',
           justifyContent: 'space-between',
         },
         homeTeamPlayers: {
